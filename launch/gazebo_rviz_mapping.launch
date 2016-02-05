@@ -1,0 +1,13 @@
+<launch>
+  <arg name="show_rviz" default="true" />
+  <!-- Gazebo Turtlebot -->
+  <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+    <arg name="world_file"  default="$(env TURTLEBOT_GAZEBO_WORLD_FILE)"/>
+  </include>
+  <!-- Turtlebot mapping -->
+  <include file="$(find turtlebot_gazebo)/launch/gmapping_demo.launch"/>
+  <!-- Rviz -->  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find tof_learning_ros)/rviz/navigation_tof.rviz" if="$(arg show_rviz)"/>
+  <!-- Teleoperation with keyboard -->
+  <include file="$(find turtlebot_teleop)/launch/keyboard_teleop.launch"/>
+</launch>
