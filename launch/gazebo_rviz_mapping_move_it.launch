@@ -1,6 +1,6 @@
 <launch>
   <arg name="show_rviz" default="true" />
-  <!-- Gazebo Turtlebot -->
+  <!-- Gazebo Turtlebot + rplidar-->
   <include file="$(find tof_learning_ros)/launch/icclab_turtlebot_world.launch">
     <arg name="world_file"  default="$(env TURTLEBOT_GAZEBO_WORLD_FILE)"/>
   </include>

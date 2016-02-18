@@ -1,13 +1,17 @@
 <launch>
   <arg name="show_rviz" default="true" />
   <!-- Gazebo Turtlebot -->
-  <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+  <!-- <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch"> -->
+  <!-- find out why it doesn't work with this one: -->   
+  <include file="$(find tof_learning_ros)/launch/icclab_turtlebot_world.launch">
     <arg name="world_file"  default="$(env TURTLEBOT_GAZEBO_WORLD_FILE)"/>
   </include>
   <!-- Turtlebot SLAM -->
   <include file="$(find turtlebot_navigation)/launch/includes/gmapping.launch.xml"/>
   <!-- Turtlebot move-base -->
-  <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
+  <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml">
+    <arg name="custom_param_file" default="$(find tof_learning_ros)/param/icclab_dwa_local_planner_params_override.yaml"/>
+  </include>
   <include file="$(find turtlebot_navigation)/launch/includes/amcl.launch.xml"/>
   <!-- Rviz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find tof_learning_ros)/rviz/navigation_exploration.rviz" if="$(arg show_rviz)"/>
